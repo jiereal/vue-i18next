@@ -1,7 +1,7 @@
 import Vue, { ComponentOptions } from "vue";
 import * as i18next from "i18next";
 import VueI18Next from "../index";
-import { TranslationFunction } from "i18next";
+import { TFunction } from "i18next";
 import Component from "vue-class-component";
 
 /**
