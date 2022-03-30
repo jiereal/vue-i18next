@@ -1,4 +1,4 @@
-import i18next from 'i18next';
+import i18next, { StringMap, TFunctionKeys, TFunctionResult, TOptions } from 'i18next';
 import Vue, { PluginFunction } from "vue";
 
 declare class VueI18Next {
@@ -33,10 +33,29 @@ declare module "vue/types/options" {
   }
 }
 
+export interface VueI18NextTFunction<TKeys extends TFunctionKeys = string> {
+  // basic usage
+  <
+  TResult extends TFunctionResult = string,
+  TInterpolationMap extends object = StringMap
+  >(
+    key: TKeys | TKeys[],
+    options?: TOptions<TInterpolationMap> | string,
+  ): TResult;
+  // overloaded usage
+  <
+    TResult extends TFunctionResult = string,
+    TInterpolationMap extends object = StringMap
+  >(
+    key: TKeys | TKeys[],
+    defaultValue?: string,
+    options?: TOptions<TInterpolationMap> | string,
+  ): TResult;
+}
 declare module "vue/types/vue" {
   interface Vue {
     readonly $i18n: VueI18Next;
-    $t: i18next.TFunction;
+    // $t: VueI18NextTFunction<string>;
   }
 }
 
